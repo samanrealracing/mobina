@@ -1,0 +1,2558 @@
+/* ==================================================
+   RESET
+================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background: #080a0e;
+    color: white;
+
+    font-family:
+        "Segoe UI",
+        Tahoma,
+        Arial,
+        sans-serif;
+
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+
+    touch-action: none;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+#app {
+    position: relative;
+
+    width: 100%;
+    height: 100dvh;
+
+    overflow: hidden;
+
+    background: #080a0e;
+}
+
+
+/* ==================================================
+   LOCK SCREEN
+================================================== */
+
+#lockScreen {
+    position: absolute;
+    inset: 0;
+
+    z-index: 1000;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    transition:
+        opacity .65s ease,
+        transform .75s ease;
+}
+
+#lockScreen.unlocking {
+    opacity: 0;
+    transform: scale(1.025);
+    pointer-events: none;
+}
+
+.lockBackground {
+    position: absolute;
+    inset: 0;
+
+    background:
+        url("assets/images/background.jpg")
+        center / cover no-repeat;
+
+    filter:
+        brightness(.52)
+        saturate(.8);
+}
+
+.lockOverlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0,0,0,.12),
+            rgba(0,0,0,.58)
+        );
+}
+
+.lockNoise {
+    display: none;
+}
+
+.lockGlow {
+    position: absolute;
+
+    width: 420px;
+    height: 420px;
+
+    left: 50%;
+    top: 45%;
+
+    transform:
+        translate(-50%,-50%);
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,100,170,.035);
+
+    filter: blur(55px);
+}
+
+.lockContent {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        25px 25px
+        calc(
+            25px +
+            env(safe-area-inset-bottom)
+        );
+}
+
+.lockTop {
+    width: 100%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+.lockSystem {
+    font-family: monospace;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    color:
+        rgba(255,255,255,.55);
+}
+
+.lockStatus {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    font-family: monospace;
+
+    font-size: 8px;
+
+    color:
+        rgba(255,255,255,.4);
+}
+
+.lockStatus span {
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: #7cffb0;
+}
+
+.lockCenter {
+    text-align: center;
+}
+
+.lockTime {
+    font-size:
+        clamp(
+            72px,
+            13vw,
+            145px
+        );
+
+    font-weight: 200;
+
+    line-height: .9;
+
+    letter-spacing: -6px;
+
+    text-shadow:
+        0 15px 40px
+        rgba(0,0,0,.45);
+}
+
+.lockDate {
+    margin-top: 14px;
+
+    font-size:
+        clamp(
+            14px,
+            2vw,
+            20px
+        );
+
+    color:
+        rgba(255,255,255,.68);
+}
+
+.lockBottom {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 6px;
+}
+
+.lockHint {
+    font-size: 9px;
+
+    color:
+        rgba(255,255,255,.38);
+}
+
+.lockArrow {
+    font-size: 14px;
+
+    color:
+        rgba(255,255,255,.48);
+}
+
+
+/* ==================================================
+   DESKTOP
+================================================== */
+
+#desktop {
+    position: absolute;
+
+    inset: 0;
+
+    overflow: hidden;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity .55s ease;
+}
+
+#desktop.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+#desktopBackground {
+    position: absolute;
+    inset: 0;
+
+    background:
+        url("assets/images/background.jpg")
+        center / cover no-repeat;
+
+    filter:
+        brightness(.54)
+        saturate(.82);
+
+    transition:
+        background-image .25s ease;
+}
+
+.desktopOverlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,0,0,.08),
+            rgba(0,0,0,.25)
+        );
+}
+
+
+/* ==================================================
+   TOP BAR
+================================================== */
+
+.desktopTopBar {
+    position: absolute;
+
+    top: 14px;
+    left: 16px;
+    right: 16px;
+
+    z-index: 20;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    pointer-events: none;
+}
+
+.systemBrand {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding:
+        6px 10px;
+
+    border-radius: 999px;
+
+    background:
+        rgba(0,0,0,.2);
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    font-family: monospace;
+
+    font-size: 8px;
+
+    color:
+        rgba(255,255,255,.55);
+}
+
+.systemBrand small {
+    opacity: .3;
+}
+
+.brandDot {
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background:
+        #78ffb0;
+}
+
+.systemCenter {
+    font-family: monospace;
+
+    font-size: 7px;
+
+    letter-spacing: 1.5px;
+
+    color:
+        rgba(255,255,255,.22);
+}
+
+.systemRight {
+    font-family: monospace;
+
+    font-size: 7px;
+
+    color:
+        rgba(120,255,176,.5);
+}
+
+
+/* ==================================================
+   DESKTOP ICONS
+================================================== */
+
+#desktopIcons {
+    position: absolute;
+
+    top: 58px;
+    left: 14px;
+
+    z-index: 20;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.desktopIcon {
+    width: 74px;
+    min-height: 74px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    border:
+        1px solid transparent;
+
+    border-radius: 9px;
+
+    background: transparent;
+
+    color: white;
+
+    cursor: pointer;
+
+    transition:
+        background .12s ease;
+}
+
+.desktopIcon:hover {
+    background:
+        rgba(255,255,255,.07);
+}
+
+.iconBox {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background:
+        rgba(255,255,255,.08);
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+}
+
+.iconBox svg {
+    width: 20px;
+    height: 20px;
+
+    fill: none;
+
+    stroke:
+        rgba(255,255,255,.8);
+
+    stroke-width: 1.5;
+}
+
+.desktopIcon > span {
+    font-size: 9px;
+
+    color:
+        rgba(255,255,255,.72);
+
+    text-shadow:
+        0 2px 5px
+        rgba(0,0,0,.8);
+}
+
+
+/* ==================================================
+   WIDGETS
+================================================== */
+
+#desktopWidgets {
+    position: absolute;
+
+    top: 58px;
+    right: 15px;
+
+    z-index: 15;
+
+    width:
+        min(
+            315px,
+            36vw
+        );
+
+    display: grid;
+
+    gap: 7px;
+}
+
+.widget {
+    padding: 13px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.09);
+
+    border-radius: 14px;
+
+    background:
+        rgba(15,18,24,.68);
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.18);
+}
+
+.widgetTop {
+    display: flex;
+
+    justify-content: space-between;
+}
+
+.widgetLabel {
+    font-family: monospace;
+
+    font-size: 7px;
+
+    letter-spacing: 1.2px;
+
+    color:
+        rgba(255,255,255,.34);
+}
+
+.widgetMini {
+    font-family: monospace;
+
+    font-size: 6px;
+
+    color:
+        rgba(255,255,255,.2);
+}
+
+
+/* CLOCK */
+
+.widgetTime {
+    margin-top: 7px;
+
+    font-size: 34px;
+
+    line-height: 1;
+
+    font-weight: 200;
+
+    letter-spacing: -2px;
+}
+
+.widgetDate {
+    margin-top: 4px;
+
+    font-size: 8px;
+
+    color:
+        rgba(255,255,255,.38);
+}
+
+
+/* MUSIC */
+
+.musicMain {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-top: 9px;
+}
+
+.musicArtwork {
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background:
+        rgba(255,255,255,.06);
+
+    font-size: 18px;
+}
+
+.musicInfo strong {
+    display: block;
+
+    font-size: 9px;
+
+    font-weight: 500;
+}
+
+.musicInfo span {
+    display: block;
+
+    margin-top: 2px;
+
+    font-size: 7px;
+
+    color:
+        rgba(255,255,255,.3);
+}
+
+.musicProgress {
+    height: 2px;
+
+    margin-top: 10px;
+
+    background:
+        rgba(255,255,255,.07);
+
+    overflow: hidden;
+}
+
+.musicProgress div {
+    width: 0%;
+
+    height: 100%;
+
+    background:
+        rgba(255,255,255,.7);
+}
+
+.musicBottom {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-top: 7px;
+}
+
+.musicBottom button {
+    width: 24px;
+    height: 24px;
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.08);
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 8px;
+}
+
+.musicBottom span {
+    font-family: monospace;
+
+    font-size: 7px;
+
+    color:
+        rgba(255,255,255,.3);
+}
+
+
+/* WEATHER */
+
+.weatherLocation {
+    margin-top: 7px;
+
+    font-size: 8px;
+
+    color:
+        rgba(255,255,255,.3);
+}
+
+.weatherMain {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-top: 8px;
+}
+
+.weatherTemperature {
+    font-size: 34px;
+
+    font-weight: 200;
+
+    line-height: 1;
+}
+
+.weatherCondition {
+    margin-top: 4px;
+
+    font-size: 8px;
+
+    color:
+        rgba(255,255,255,.4);
+}
+
+.weatherIcon {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background:
+        rgba(255,255,255,.05);
+
+    font-size: 20px;
+}
+
+.weatherDetails {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 6px;
+
+    margin-top: 9px;
+
+    padding-top: 8px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.05);
+}
+
+.weatherDetails div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2px;
+}
+
+.weatherDetails span {
+    font-family: monospace;
+
+    font-size: 5px;
+
+    color:
+        rgba(255,255,255,.2);
+}
+
+.weatherDetails strong {
+    font-size: 8px;
+
+    font-weight: 400;
+
+    color:
+        rgba(255,255,255,.5);
+}
+
+
+/* ==================================================
+   WINDOWS
+================================================== */
+
+#windowLayer {
+    position: absolute;
+    inset: 0;
+
+    z-index: 50;
+
+    pointer-events: none;
+}
+
+.appWindow {
+    position: absolute;
+
+    width:
+        min(
+            700px,
+            calc(100vw - 40px)
+        );
+
+    height:
+        min(
+            550px,
+            calc(100vh - 95px)
+        );
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%,-50%)
+        scale(.97);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        rgba(255,255,255,.1);
+
+    border-radius: 14px;
+
+    background:
+        rgba(14,17,22,.96);
+
+    box-shadow:
+        0 20px 55px
+        rgba(0,0,0,.35);
+
+    transition:
+        opacity .18s ease,
+        transform .2s ease;
+}
+
+.appWindow.open {
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+    transform:
+        translate(-50%,-50%)
+        scale(1);
+}
+
+.appWindow.minimized {
+    opacity: 0;
+
+    pointer-events: none;
+
+    transform:
+        translate(-50%,20px)
+        scale(.9);
+}
+
+.windowHeader {
+    height: 44px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        0 8px 0 14px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.06);
+
+    cursor: grab;
+}
+
+.windowTitle {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    font-size: 11px;
+
+    color:
+        rgba(255,255,255,.75);
+}
+
+.windowDot {
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.45);
+}
+
+.windowControls {
+    display: flex;
+
+    gap: 3px;
+}
+
+.windowControls button {
+    width: 28px;
+    height: 26px;
+
+    border: 0;
+
+    border-radius: 6px;
+
+    background: transparent;
+
+    color:
+        rgba(255,255,255,.42);
+
+    cursor: pointer;
+}
+
+.windowControls button:hover {
+    background:
+        rgba(255,255,255,.07);
+
+    color: white;
+}
+
+.windowControls .windowClose:hover {
+    background:
+        rgba(255,70,90,.6);
+}
+
+.windowBody {
+    height:
+        calc(100% - 44px);
+}
+
+
+/* ==================================================
+   PHOTOS
+================================================== */
+
+.photosBody {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 15px;
+}
+
+.photoViewer {
+    position: relative;
+
+    width: 100%;
+
+    height:
+        calc(100% - 35px);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+#galleryImage {
+    max-width: 84%;
+    max-height: 90%;
+
+    object-fit: contain;
+
+    border-radius: 9px;
+
+    opacity: 0;
+
+    transition:
+        opacity .15s ease;
+}
+
+.galleryArrow {
+    position: absolute;
+
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    width: 36px;
+    height: 36px;
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.07);
+
+    color: white;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    z-index: 3;
+}
+
+#prevPhoto {
+    left: 8px;
+}
+
+#nextPhoto {
+    right: 8px;
+}
+
+.galleryFooter {
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+#photoCounter {
+    font-family: monospace;
+
+    font-size: 7px;
+
+    color:
+        rgba(255,255,255,.35);
+}
+
+#galleryDots {
+    display: flex;
+
+    gap: 4px;
+}
+
+.galleryDot {
+    width: 4px;
+    height: 4px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.2);
+}
+
+.galleryDot.active {
+    width: 11px;
+
+    border-radius: 4px;
+
+    background:
+        rgba(255,120,165,.7);
+}
+
+.photoLoading {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    font-family: monospace;
+
+    font-size: 8px;
+
+    color:
+        rgba(255,255,255,.35);
+
+    z-index: 2;
+}
+
+.photoError {
+    display: none;
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    padding:
+        9px 12px;
+
+    border-radius: 8px;
+
+    background:
+        rgba(255,60,90,.1);
+
+    color:
+        rgba(255,160,175,.8);
+
+    font-family: monospace;
+
+    font-size: 8px;
+
+    z-index: 4;
+}
+
+.photoError.visible {
+    display: block;
+}
+
+
+/* ==================================================
+   THIS PC
+================================================== */
+
+.pcBody {
+    padding: 22px;
+}
+
+.pcHero {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding-bottom: 18px;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.06);
+}
+
+.pcHeroIcon {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background:
+        rgba(255,255,255,.05);
+}
+
+.pcHeroIcon svg {
+    width: 26px;
+
+    fill: none;
+
+    stroke:
+        rgba(255,255,255,.76);
+
+    stroke-width: 1.5;
+}
+
+.pcHero h2 {
+    font-size: 16px;
+
+    font-weight: 500;
+}
+
+.pcHero span {
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 8px;
+
+    color:
+        rgba(255,255,255,.3);
+}
+
+.driveGrid {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 10px;
+
+    margin-top: 16px;
+}
+
+.driveCard {
+    padding: 14px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.06);
+
+    border-radius: 11px;
+
+    background:
+        rgba(255,255,255,.025);
+}
+
+.driveTop {
+    display: flex;
+
+    justify-content: space-between;
+
+    color:
+        rgba(255,255,255,.48);
+}
+
+.driveTop small {
+    font-family: monospace;
+
+    font-size: 5px;
+
+    color:
+        rgba(255,255,255,.25);
+}
+
+.driveCard > strong {
+    display: block;
+
+    margin-top: 13px;
+
+    font-size: 9px;
+}
+
+.driveCard > span {
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 7px;
+
+    color:
+        rgba(255,255,255,.3);
+}
+
+.driveBar {
+    height: 2px;
+
+    margin-top: 13px;
+
+    background:
+        rgba(255,255,255,.06);
+}
+
+.driveBar span {
+    display: block;
+
+    width: 38%;
+
+    height: 100%;
+
+    background:
+        rgba(255,255,255,.45);
+}
+
+.pcMeta {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 8px;
+
+    margin-top: 18px;
+
+    padding-top: 14px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.06);
+
+    font-family: monospace;
+
+    font-size: 7px;
+}
+
+.pcMeta span {
+    color:
+        rgba(255,255,255,.22);
+}
+
+.pcMeta strong {
+    color:
+        rgba(255,255,255,.58);
+
+    font-weight: 400;
+}
+
+
+/* ==================================================
+   NOTES
+================================================== */
+
+.notesBody {
+    display: flex;
+
+    flex-direction: column;
+}
+
+.notesToolbar {
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        0 12px;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.06);
+
+    font-family: monospace;
+
+    font-size: 6px;
+
+    color:
+        rgba(255,255,255,.28);
+}
+
+.readOnlyNotes {
+    flex: 1;
+
+    padding: 18px;
+
+    overflow: auto;
+
+    white-space: pre-wrap;
+
+    font:
+        12px/2
+        "Segoe UI",
+        Tahoma,
+        Arial,
+        sans-serif;
+
+    color:
+        rgba(255,255,255,.7);
+
+    user-select: text;
+
+    -webkit-user-select: text;
+
+    background:
+        rgba(0,0,0,.06);
+}
+
+
+/* ==================================================
+   START MENU
+================================================== */
+
+#startMenu {
+    position: absolute;
+
+    left: 9px;
+    bottom: 67px;
+
+    z-index: 300;
+
+    width:
+        min(
+            500px,
+            calc(100vw - 18px)
+        );
+
+    height: 560px;
+
+    padding: 18px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.1);
+
+    border-radius: 17px;
+
+    background:
+        rgba(13,16,21,.96);
+
+    box-shadow:
+        0 25px 65px
+        rgba(0,0,0,.35);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transform:
+        translateY(10px)
+        scale(.98);
+
+    transition:
+        opacity .16s ease,
+        transform .2s ease;
+}
+
+#startMenu.open {
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+.startTop {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+.startBrand {
+    font-family: monospace;
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+
+    color:
+        rgba(255,255,255,.72);
+}
+
+#startClose {
+    width: 28px;
+    height: 28px;
+
+    border: 0;
+
+    border-radius: 7px;
+
+    background:
+        rgba(255,255,255,.04);
+
+    color:
+        rgba(255,255,255,.45);
+
+    cursor: pointer;
+}
+
+.startSearch {
+    height: 44px;
+
+    margin-top: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding:
+        0 12px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+    border-radius: 9px;
+
+    background:
+        rgba(255,255,255,.035);
+}
+
+.startSearch svg {
+    width: 15px;
+
+    fill: none;
+
+    stroke:
+        rgba(255,255,255,.4);
+
+    stroke-width: 1.5;
+}
+
+.startSearch input {
+    width: 100%;
+
+    height: 100%;
+
+    border: 0;
+
+    outline: 0;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 10px;
+}
+
+.startSearch input::placeholder {
+    color:
+        rgba(255,255,255,.25);
+}
+
+.startSection {
+    margin-top: 21px;
+}
+
+.sectionHeading {
+    display: flex;
+
+    justify-content: space-between;
+
+    font-family: monospace;
+
+    font-size: 6px;
+
+    letter-spacing: 1px;
+
+    color:
+        rgba(255,255,255,.26);
+}
+
+.startApps {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 7px;
+
+    margin-top: 9px;
+}
+
+.startApp {
+    min-height: 88px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    border: 1px solid transparent;
+
+    border-radius: 11px;
+
+    background: transparent;
+
+    color: white;
+
+    cursor: pointer;
+}
+
+.startApp:hover {
+    background:
+        rgba(255,255,255,.05);
+}
+
+.startAppIcon {
+    width: 43px;
+    height: 43px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background:
+        rgba(255,255,255,.05);
+
+    font-size: 21px;
+}
+
+.startApp span {
+    font-size: 8px;
+
+    color:
+        rgba(255,255,255,.6);
+}
+
+.appearanceControls {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 7px;
+
+    margin-top: 9px;
+}
+
+.appearanceButton {
+    height: 58px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.06);
+
+    border-radius: 11px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    color:
+        rgba(255,255,255,.6);
+
+    cursor: pointer;
+}
+
+.appearanceButton span {
+    font-size: 17px;
+}
+
+.appearanceButton strong {
+    font-size: 8px;
+
+    font-weight: 400;
+}
+
+.appearanceButton.active {
+    background:
+        rgba(255,100,150,.08);
+
+    border-color:
+        rgba(255,120,170,.3);
+}
+
+.recentItem {
+    margin-top: 8px;
+
+    padding: 9px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.045);
+
+    border-radius: 9px;
+
+    background:
+        rgba(255,255,255,.02);
+}
+
+.recentIcon {
+    width: 31px;
+    height: 31px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    background:
+        rgba(255,255,255,.04);
+
+    color:
+        rgba(255,255,255,.4);
+}
+
+.recentItem strong {
+    display: block;
+
+    font-size: 8px;
+
+    font-weight: 500;
+}
+
+.recentItem span {
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 6px;
+
+    color:
+        rgba(255,255,255,.25);
+}
+
+.recentItem small {
+    margin-left: auto;
+
+    font-family: monospace;
+
+    font-size: 5px;
+
+    color:
+        rgba(255,255,255,.2);
+}
+
+.startBottom {
+    position: absolute;
+
+    left: 18px;
+    right: 18px;
+    bottom: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding-top: 11px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.05);
+}
+
+.profile {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+.profileAvatar {
+    width: 31px;
+    height: 31px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.07);
+
+    font-size: 10px;
+}
+
+.profile strong {
+    display: block;
+
+    font-size: 8px;
+
+    font-weight: 500;
+}
+
+.profile span {
+    display: block;
+
+    margin-top: 2px;
+
+    font-family: monospace;
+
+    font-size: 5px;
+
+    color:
+        rgba(255,255,255,.22);
+}
+
+#startPower {
+    width: 31px;
+    height: 31px;
+
+    border: 0;
+
+    border-radius: 8px;
+
+    background:
+        rgba(255,255,255,.04);
+
+    color:
+        rgba(255,255,255,.45);
+
+    cursor: pointer;
+}
+
+
+/* ==================================================
+   TASKBAR
+================================================== */
+
+#taskbar {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    z-index: 400;
+
+    height:
+        calc(
+            55px +
+            env(safe-area-inset-bottom)
+        );
+
+    display: flex;
+
+    align-items: flex-start;
+
+    padding: 5px 7px;
+
+    background:
+        rgba(8,10,14,.88);
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.07);
+}
+
+.taskbarLeft {
+    display: flex;
+
+    align-items: center;
+
+    gap: 4px;
+}
+
+#startButton {
+    width: 43px;
+    height: 43px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    grid-template-rows:
+        1fr 1fr;
+
+    gap: 2px;
+
+    padding: 9px;
+
+    border: 0;
+
+    border-radius: 8px;
+
+    background: transparent;
+
+    cursor: pointer;
+}
+
+#startButton:hover {
+    background:
+        rgba(255,255,255,.07);
+}
+
+#startButton span {
+    background:
+        rgba(255,255,255,.82);
+}
+
+.taskbarApps {
+    display: flex;
+
+    gap: 3px;
+}
+
+.taskApp {
+    width: 40px;
+    height: 40px;
+
+    border: 0;
+
+    border-radius: 7px;
+
+    background:
+        rgba(255,255,255,.035);
+
+    color: white;
+
+    cursor: pointer;
+}
+
+.taskApp.active {
+    background:
+        rgba(255,255,255,.09);
+}
+
+.taskbarCenter {
+    position: absolute;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    font-family: monospace;
+
+    font-size: 6px;
+
+    letter-spacing: 1.6px;
+
+    color:
+        rgba(255,255,255,.17);
+}
+
+.systemTray {
+    margin-left: auto;
+
+    height: 43px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+}
+
+.systemTray > span {
+    font-size: 10px;
+
+    color:
+        rgba(255,255,255,.4);
+}
+
+.trayClock {
+    min-width: 60px;
+
+    text-align: right;
+}
+
+.trayClock strong {
+    display: block;
+
+    font-size: 9px;
+
+    font-weight: 400;
+}
+
+.trayClock small {
+    display: block;
+
+    margin-top: 2px;
+
+    font-size: 6px;
+
+    color:
+        rgba(255,255,255,.24);
+}
+
+
+/* ==================================================
+   NOTIFICATION
+================================================== */
+
+#notification {
+    position: absolute;
+
+    right: 12px;
+    bottom: 66px;
+
+    z-index: 500;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding:
+        8px 10px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    border-radius: 9px;
+
+    background:
+        rgba(10,12,16,.93);
+
+    box-shadow:
+        0 15px 35px
+        rgba(0,0,0,.25);
+
+    opacity: 0;
+
+    transform:
+        translateY(8px);
+
+    pointer-events: none;
+
+    transition:
+        opacity .2s ease,
+        transform .2s ease;
+}
+
+#notification.visible {
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+.notificationIcon {
+    width: 22px;
+    height: 22px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 6px;
+
+    background:
+        rgba(100,255,170,.08);
+
+    color:
+        #90ffc0;
+
+    font-size: 9px;
+}
+
+#notification strong {
+    display: block;
+
+    font-size: 7px;
+
+    font-weight: 500;
+}
+
+#notification span {
+    display: block;
+
+    margin-top: 2px;
+
+    font-size: 6px;
+
+    color:
+        rgba(255,255,255,.25);
+}
+
+
+/* ==================================================
+   CONTEXT MENU
+================================================== */
+
+.contextMenu {
+    position: fixed;
+
+    z-index: 1000;
+
+    width: 205px;
+
+    padding: 5px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.09);
+
+    border-radius: 10px;
+
+    background:
+        rgba(13,15,20,.97);
+
+    box-shadow:
+        0 18px 45px
+        rgba(0,0,0,.35);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transform:
+        scale(.98);
+
+    transform-origin:
+        top left;
+
+    transition:
+        opacity .12s ease,
+        transform .12s ease;
+}
+
+.contextMenu.open {
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+    transform:
+        scale(1);
+}
+
+.contextItem {
+    width: 100%;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding:
+        0 10px;
+
+    border: 0;
+
+    border-radius: 7px;
+
+    background: transparent;
+
+    color:
+        rgba(255,255,255,.72);
+
+    text-align: left;
+
+    font-size: 10px;
+
+    cursor: pointer;
+}
+
+.contextItem:hover {
+    background:
+        rgba(255,255,255,.07);
+
+    color: white;
+}
+
+.contextItem span:first-child {
+    width: 18px;
+
+    text-align: center;
+
+    color:
+        rgba(255,255,255,.4);
+}
+
+.contextDivider {
+    height: 1px;
+
+    margin:
+        4px 6px;
+
+    background:
+        rgba(255,255,255,.06);
+}
+
+
+/* ==================================================
+   WALLPAPER PICKER
+================================================== */
+
+.wallpaperMenu {
+    position: fixed;
+
+    left: 50%;
+    top: 50%;
+
+    z-index: 1100;
+
+    width:
+        min(
+            620px,
+            calc(100vw - 24px)
+        );
+
+    padding: 15px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.09);
+
+    border-radius: 15px;
+
+    background:
+        rgba(12,14,19,.97);
+
+    box-shadow:
+        0 25px 70px
+        rgba(0,0,0,.4);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transform:
+        translate(-50%,-50%)
+        scale(.97);
+
+    transition:
+        opacity .15s ease,
+        transform .18s ease;
+}
+
+.wallpaperMenu.open {
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+    transform:
+        translate(-50%,-50%)
+        scale(1);
+}
+
+.wallpaperHeader {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+
+    font-family: monospace;
+
+    font-size: 7px;
+
+    letter-spacing: 1px;
+
+    color:
+        rgba(255,255,255,.36);
+}
+
+.wallpaperHeader button {
+    width: 27px;
+    height: 27px;
+
+    border: 0;
+
+    border-radius: 7px;
+
+    background:
+        rgba(255,255,255,.04);
+
+    color:
+        rgba(255,255,255,.4);
+
+    cursor: pointer;
+}
+
+.wallpaperGrid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 8px;
+
+    max-height:
+        calc(
+            100vh - 130px
+        );
+
+    overflow-y: auto;
+}
+
+.wallpaperItem {
+    position: relative;
+
+    overflow: hidden;
+
+    aspect-ratio: 16 / 10;
+
+    padding: 0;
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+    border-radius: 9px;
+
+    background: #111;
+
+    cursor: pointer;
+}
+
+.wallpaperItem:hover {
+    border-color:
+        rgba(255,255,255,.25);
+}
+
+.wallpaperItem.active {
+    border-color:
+        rgba(255,120,170,.7);
+}
+
+.wallpaperItem img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+.wallpaperItemLabel {
+    position: absolute;
+
+    left: 6px;
+    right: 6px;
+    bottom: 5px;
+
+    padding:
+        4px 5px;
+
+    border-radius: 5px;
+
+    background:
+        rgba(0,0,0,.48);
+
+    font-size: 7px;
+
+    color:
+        rgba(255,255,255,.75);
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+
+/* ==================================================
+   LIGHT MODE
+================================================== */
+
+#desktop.lightMode #desktopBackground {
+    filter:
+        brightness(.9)
+        saturate(.85);
+}
+
+#desktop.lightMode .desktopOverlay {
+    background:
+        rgba(255,255,255,.08);
+}
+
+#desktop.lightMode .widget,
+#desktop.lightMode .appWindow,
+#desktop.lightMode #startMenu,
+#desktop.lightMode .contextMenu,
+#desktop.lightMode .wallpaperMenu {
+    background:
+        rgba(245,247,250,.96);
+
+    color: #17191e;
+
+    border-color:
+        rgba(0,0,0,.09);
+
+    box-shadow:
+        0 20px 50px
+        rgba(0,0,0,.12);
+}
+
+#desktop.lightMode .widgetLabel,
+#desktop.lightMode .widgetMini,
+#desktop.lightMode .widgetDate,
+#desktop.lightMode .weatherLocation,
+#desktop.lightMode .weatherCondition,
+#desktop.lightMode .weatherDetails span,
+#desktop.lightMode .musicInfo span,
+#desktop.lightMode .systemBrand,
+#desktop.lightMode .systemCenter,
+#desktop.lightMode .desktopIcon > span,
+#desktop.lightMode .sectionHeading,
+#desktop.lightMode .recentItem span,
+#desktop.lightMode .profile span {
+    color:
+        rgba(20,25,32,.45);
+}
+
+#desktop.lightMode .widgetTime,
+#desktop.lightMode .weatherTemperature,
+#desktop.lightMode .musicInfo strong,
+#desktop.lightMode .windowTitle,
+#desktop.lightMode .startBrand,
+#desktop.lightMode .startApp,
+#desktop.lightMode .recentItem strong,
+#desktop.lightMode .profile strong {
+    color:
+        #17191e;
+}
+
+#desktop.lightMode #taskbar {
+    background:
+        rgba(245,247,250,.95);
+
+    border-color:
+        rgba(0,0,0,.08);
+}
+
+#desktop.lightMode #startButton span {
+    background:
+        #20242a;
+}
+
+#desktop.lightMode .readOnlyNotes {
+    color:
+        rgba(20,25,32,.75);
+
+    background:
+        rgba(255,255,255,.6);
+}
+
+#desktop.lightMode .contextItem {
+    color:
+        rgba(20,24,30,.76);
+}
+
+#desktop.lightMode .contextItem:hover {
+    background:
+        rgba(0,0,0,.06);
+}
+
+#desktop.lightMode .appearanceButton {
+    color:
+        rgba(20,25,32,.65);
+
+    border-color:
+        rgba(0,0,0,.08);
+
+    background:
+        rgba(0,0,0,.03);
+}
+
+#desktop.lightMode .appearanceButton.active {
+    background:
+        rgba(255,120,165,.12);
+
+    border-color:
+        rgba(220,90,140,.3);
+}
+
+
+/* ==================================================
+   MOBILE
+================================================== */
+
+@media (max-width: 700px) {
+
+    .lockTime {
+        font-size: 66px;
+    }
+
+    .systemCenter {
+        display: none;
+    }
+
+    #desktopWidgets {
+        width: 175px;
+
+        top: 53px;
+        right: 8px;
+    }
+
+    #desktopIcons {
+        top: 55px;
+        left: 8px;
+    }
+
+    .desktopIcon {
+        width: 67px;
+        min-height: 67px;
+    }
+
+    .appWindow {
+        width:
+            calc(100vw - 16px);
+
+        height:
+            calc(100dvh - 80px);
+    }
+
+    #startMenu {
+        left: 7px;
+        bottom: 63px;
+
+        width:
+            calc(100vw - 14px);
+
+        height:
+            min(
+                560px,
+                calc(100dvh - 76px)
+            );
+    }
+
+    #notification {
+        left: 8px;
+        right: 8px;
+    }
+
+    .wallpaperGrid {
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}
+
+@media (max-width: 390px) {
+
+    .weatherWidget {
+        display: none;
+    }
+
+    .lockTime {
+        font-size: 58px;
+    }
+
+    .startApps {
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}

@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
+
+    <meta name="theme-color" content="#080a0e">
+
+    <title>MBN OS</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="app">
+
+    <!-- ==================================================
+         LOCK SCREEN
+    ================================================== -->
+
+    <section id="lockScreen">
+
+        <div class="lockBackground"></div>
+
+        <div class="lockOverlay"></div>
+
+        <div class="lockContent">
+
+            <div class="lockTop">
+
+                <div class="lockSystem">
+                    MBN OS
+                </div>
+
+                <div class="lockStatus">
+
+                    <span></span>
+
+                    READY
+
+                </div>
+
+            </div>
+
+
+            <div class="lockCenter">
+
+                <div
+                    id="lockTime"
+                    class="lockTime"
+                >
+                    00:00
+                </div>
+
+                <div
+                    id="lockDate"
+                    class="lockDate"
+                >
+                    Thursday, August 13
+                </div>
+
+            </div>
+
+
+            <div class="lockBottom">
+
+                <div class="lockHint">
+                    Click or swipe up to continue
+                </div>
+
+                <div class="lockArrow">
+                    ↑
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================================================
+         DESKTOP
+    ================================================== -->
+
+    <main id="desktop">
+
+        <div id="desktopBackground"></div>
+
+        <div class="desktopOverlay"></div>
+
+
+        <!-- TOP BAR -->
+
+        <div class="desktopTopBar">
+
+            <div class="systemBrand">
+
+                <span class="brandDot"></span>
+
+                <span>
+                    MBN OS
+                </span>
+
+                <small>
+                    01.00
+                </small>
+
+            </div>
+
+
+            <div class="systemCenter">
+                PERSONAL DESKTOP
+            </div>
+
+
+            <div class="systemRight">
+                ONLINE
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             DESKTOP ICONS
+        ================================================== -->
+
+        <section id="desktopIcons">
+
+
+            <!-- PHOTOS -->
+
+            <button
+                class="desktopIcon"
+                data-window="photos"
+                type="button"
+            >
+
+                <div class="iconBox">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <rect
+                            x="3"
+                            y="4"
+                            width="18"
+                            height="16"
+                            rx="2"
+                        />
+
+                        <circle
+                            cx="8"
+                            cy="9"
+                            r="1.5"
+                        />
+
+                        <path
+                            d="M4 17l5-5 3 3 2-2 6 5"
+                        />
+
+                    </svg>
+
+                </div>
+
+                <span>
+                    Photos
+                </span>
+
+            </button>
+
+
+            <!-- THIS PC -->
+
+            <button
+                class="desktopIcon"
+                data-window="about"
+                type="button"
+            >
+
+                <div class="iconBox">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <rect
+                            x="3"
+                            y="4"
+                            width="18"
+                            height="13"
+                            rx="2"
+                        />
+
+                        <path d="M8 21h8"/>
+                        <path d="M12 17v4"/>
+
+                    </svg>
+
+                </div>
+
+                <span>
+                    This PC
+                </span>
+
+            </button>
+
+
+            <!-- NOTES -->
+
+            <button
+                class="desktopIcon"
+                data-window="notes"
+                type="button"
+            >
+
+                <div class="iconBox">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path d="M5 3h10l4 4v14H5z"/>
+
+                        <path d="M15 3v5h4"/>
+
+                        <path d="M8 12h8"/>
+
+                        <path d="M8 16h6"/>
+
+                    </svg>
+
+                </div>
+
+                <span>
+                    Notes
+                </span>
+
+            </button>
+
+        </section>
+
+
+        <!-- ==================================================
+             WIDGETS
+        ================================================== -->
+
+        <section id="desktopWidgets">
+
+
+            <!-- CLOCK -->
+
+            <div class="widget">
+
+                <div class="widgetTop">
+
+                    <span class="widgetLabel">
+                        LOCAL TIME
+                    </span>
+
+                    <span class="widgetMini">
+                        LIVE
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="widgetTime"
+                    class="widgetTime"
+                >
+                    00:00
+                </div>
+
+
+                <div
+                    id="widgetDate"
+                    class="widgetDate"
+                >
+                    Thursday, August 13
+                </div>
+
+            </div>
+
+
+            <!-- MUSIC -->
+
+            <div class="widget">
+
+                <div class="widgetTop">
+
+                    <span class="widgetLabel">
+                        MUSIC
+                    </span>
+
+                    <span
+                        id="musicState"
+                        class="widgetMini"
+                    >
+                        PAUSED
+                    </span>
+
+                </div>
+
+
+                <div class="musicMain">
+
+                    <div class="musicArtwork">
+                        ♪
+                    </div>
+
+
+                    <div class="musicInfo">
+
+                        <strong>
+                            music.mp3
+                        </strong>
+
+                        <span>
+                            Local audio
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="musicProgress">
+
+                    <div id="musicProgress"></div>
+
+                </div>
+
+
+                <div class="musicBottom">
+
+                    <button
+                        id="widgetPlay"
+                        type="button"
+                    >
+                        ▶
+                    </button>
+
+                    <span id="widgetMusicTime">
+                        0:00 / 0:00
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- WEATHER -->
+
+            <div
+                class="widget weatherWidget"
+            >
+
+                <div class="widgetTop">
+
+                    <span class="widgetLabel">
+                        WEATHER
+                    </span>
+
+                    <span class="widgetMini">
+                        LIVE
+                    </span>
+
+                </div>
+
+
+                <div class="weatherLocation">
+                    Bandar Mahshahr · Khuzestan
+                </div>
+
+
+                <div class="weatherMain">
+
+                    <div>
+
+                        <div
+                            id="weatherTemperature"
+                            class="weatherTemperature"
+                        >
+                            --°
+                        </div>
+
+                        <div
+                            id="weatherCondition"
+                            class="weatherCondition"
+                        >
+                            Loading...
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="weatherIcon"
+                        class="weatherIcon"
+                    >
+                        ☁
+                    </div>
+
+                </div>
+
+
+                <div class="weatherDetails">
+
+                    <div>
+
+                        <span>
+                            HUMIDITY
+                        </span>
+
+                        <strong id="weatherHumidity">
+                            --%
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            WIND
+                        </span>
+
+                        <strong id="weatherWind">
+                            -- km/h
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             WINDOWS
+        ================================================== -->
+
+        <section id="windowLayer">
+
+
+            <!-- PHOTOS -->
+
+            <article
+                id="window-photos"
+                class="appWindow"
+                data-window="photos"
+            >
+
+                <header class="windowHeader">
+
+                    <div class="windowTitle">
+                        <span class="windowDot"></span>
+                        Photos
+                    </div>
+
+
+                    <div class="windowControls">
+
+                        <button
+                            class="windowMinimize"
+                            type="button"
+                        >
+                            −
+                        </button>
+
+                        <button
+                            class="windowClose"
+                            type="button"
+                        >
+                            ×
+                        </button>
+
+                    </div>
+
+                </header>
+
+
+                <div class="windowBody photosBody">
+
+                    <div class="photoViewer">
+
+                        <button
+                            id="prevPhoto"
+                            class="galleryArrow"
+                            type="button"
+                        >
+                            ‹
+                        </button>
+
+
+                        <div
+                            id="photoLoading"
+                            class="photoLoading"
+                        >
+                            Loading...
+                        </div>
+
+
+                        <div
+                            id="photoError"
+                            class="photoError"
+                        >
+                            Unable to load image
+                        </div>
+
+
+                        <img
+                            id="galleryImage"
+                            src=""
+                            alt=""
+                            draggable="false"
+                        >
+
+
+                        <button
+                            id="nextPhoto"
+                            class="galleryArrow"
+                            type="button"
+                        >
+                            ›
+                        </button>
+
+                    </div>
+
+
+                    <div class="galleryFooter">
+
+                        <span id="photoCounter">
+                            01 / 05
+                        </span>
+
+                        <div id="galleryDots"></div>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- THIS PC -->
+
+            <article
+                id="window-about"
+                class="appWindow"
+                data-window="about"
+            >
+
+                <header class="windowHeader">
+
+                    <div class="windowTitle">
+                        <span class="windowDot"></span>
+                        This PC
+                    </div>
+
+
+                    <div class="windowControls">
+
+                        <button
+                            class="windowMinimize"
+                            type="button"
+                        >
+                            −
+                        </button>
+
+                        <button
+                            class="windowClose"
+                            type="button"
+                        >
+                            ×
+                        </button>
+
+                    </div>
+
+                </header>
+
+
+                <div class="windowBody pcBody">
+
+                    <div class="pcHero">
+
+                        <div class="pcHeroIcon">
+
+                            <svg viewBox="0 0 24 24">
+
+                                <rect
+                                    x="3"
+                                    y="4"
+                                    width="18"
+                                    height="13"
+                                    rx="2"
+                                />
+
+                                <path d="M8 21h8"/>
+                                <path d="M12 17v4"/>
+
+                            </svg>
+
+                        </div>
+
+
+                        <div>
+
+                            <h2>
+                                This PC
+                            </h2>
+
+                            <span>
+                                Local system
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="driveGrid">
+
+                        <div class="driveCard">
+
+                            <div class="driveTop">
+
+                                <span>
+                                    ◫
+                                </span>
+
+                                <small>
+                                    SYSTEM
+                                </small>
+
+                            </div>
+
+                            <strong>
+                                Local Disk
+                            </strong>
+
+                            <span>
+                                Web Runtime
+                            </span>
+
+                            <div class="driveBar">
+                                <span></span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="driveCard">
+
+                            <div class="driveTop">
+
+                                <span>
+                                    ▱
+                                </span>
+
+                                <small>
+                                    MEDIA
+                                </small>
+
+                            </div>
+
+                            <strong>
+                                Media
+                            </strong>
+
+                            <span>
+                                Images & Audio
+                            </span>
+
+                            <div class="driveBar">
+                                <span></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="pcMeta">
+
+                        <span>
+                            Platform
+                        </span>
+
+                        <strong>
+                            Web
+                        </strong>
+
+                        <span>
+                            Runtime
+                        </span>
+
+                        <strong>
+                            Browser
+                        </strong>
+
+                        <span>
+                            Status
+                        </span>
+
+                        <strong>
+                            Ready
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- NOTES -->
+
+            <article
+                id="window-notes"
+                class="appWindow"
+                data-window="notes"
+            >
+
+                <header class="windowHeader">
+
+                    <div class="windowTitle">
+                        <span class="windowDot"></span>
+                        Notes
+                    </div>
+
+
+                    <div class="windowControls">
+
+                        <button
+                            class="windowMinimize"
+                            type="button"
+                        >
+                            −
+                        </button>
+
+                        <button
+                            class="windowClose"
+                            type="button"
+                        >
+                            ×
+                        </button>
+
+                    </div>
+
+                </header>
+
+
+                <div class="windowBody notesBody">
+
+                    <div class="notesToolbar">
+
+                        <span>
+                            READ ONLY
+                        </span>
+
+                        <span>
+                            UTF-8
+                        </span>
+
+                    </div>
+
+
+                    <pre class="readOnlyNotes">قبل از اینکه وارد زندگیم بشی وارد افکارم شده بودی، دیدنت فقط چیزی رو که قلبم از قبل می دونست رو ثابت کرد گربه
+
+گربه تو از اون اتفاق‌هایی نبودی که منتظرشون باشم؛ برای همین وقتی اومدی، همه‌چیز قبل و بعد از تو شد.
+
+تو دلیل خوب از خواب بیدار شدن و زود خوابیدنمی گربه
+
+گربه تو مثل حس خوشه بعد از بو کردن گلای بابونه ای
+
+تو برام بهار مابین دشتی پر از گندم و ابر و آسمون آبیی
+
+برام مثل نور لامپ زرد و بوی عود و نی خیس خورده ایی
+
+مثل بستنی میمونی. هیچوقت از خوردنت سیر نمیشم
+
+آفتابی لای ابرا تو غروب زمستون
+
+باعث رشدمی، انگیزه جدی گرفتن زندگی و فکر آیندمی
+
+نابی، متفاوتی، قویی، قشنگی
+
+مثل صدای بارون وقتی پنجره بازه و همه‌جا ساکته‌ای.
+
+گربه، تو از اون آدمایی نیستی که فقط حال آدمو خوب می‌کنن؛ تو کاری می‌کنی آدم دلش بخواد حال خودش و زندگی‌شو هم بهتر کنه.
+
+حسی که با اومدنت تو زندگیم دارم رو آخرین بار وقتی ۶ سالم بود داشتم؛ انقدر ناب و سالم و خوش آیند که هنوز مثل روز برام روشنه و هر وقت بهش فکر میکنم انرژی می گیرم
+
+ممنونم که به زندگیم اومدی مبینا</pre>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- ==================================================
+             START MENU
+        ================================================== -->
+
+        <aside id="startMenu">
+
+            <div class="startTop">
+
+                <div class="startBrand">
+                    MBN OS
+                </div>
+
+                <button
+                    id="startClose"
+                    type="button"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="startSearch">
+
+                <svg viewBox="0 0 24 24">
+
+                    <circle
+                        cx="11"
+                        cy="11"
+                        r="6"
+                    />
+
+                    <path
+                        d="M16 16l5 5"
+                    />
+
+                </svg>
+
+
+                <input
+                    id="startSearchInput"
+                    type="text"
+                    placeholder="Search apps..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <div class="startSection">
+
+                <div class="sectionHeading">
+
+                    <span>
+                        PINNED
+                    </span>
+
+                    <span>
+                        3 APPS
+                    </span>
+
+                </div>
+
+
+                <div class="startApps">
+
+                    <button
+                        class="startApp"
+                        data-window="photos"
+                        type="button"
+                    >
+
+                        <div class="startAppIcon">
+                            🖼️
+                        </div>
+
+                        <span>
+                            Photos
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="startApp"
+                        data-window="about"
+                        type="button"
+                    >
+
+                        <div class="startAppIcon">
+                            🖥️
+                        </div>
+
+                        <span>
+                            This PC
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="startApp"
+                        data-window="notes"
+                        type="button"
+                    >
+
+                        <div class="startAppIcon">
+                            📝
+                        </div>
+
+                        <span>
+                            Notes
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="startSection">
+
+                <div class="sectionHeading">
+                    APPEARANCE
+                </div>
+
+
+                <div class="appearanceControls">
+
+                    <button
+                        id="darkModeButton"
+                        class="appearanceButton"
+                        type="button"
+                    >
+
+                        <span>
+                            ☾
+                        </span>
+
+                        <strong>
+                            Dark
+                        </strong>
+
+                    </button>
+
+
+                    <button
+                        id="lightModeButton"
+                        class="appearanceButton"
+                        type="button"
+                    >
+
+                        <span>
+                            ☀
+                        </span>
+
+                        <strong>
+                            Light
+                        </strong>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="startSection">
+
+                <div class="sectionHeading">
+                    RECENT
+                </div>
+
+
+                <div class="recentItem">
+
+                    <div class="recentIcon">
+                        ◈
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            birthday-love
+                        </strong>
+
+                        <span>
+                            Local workspace
+                        </span>
+
+                    </div>
+
+
+                    <small>
+                        NOW
+                    </small>
+
+                </div>
+
+
+                <div class="recentItem">
+
+                    <div class="recentIcon">
+                        ◫
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            assets
+                        </strong>
+
+                        <span>
+                            Images & Audio
+                        </span>
+
+                    </div>
+
+
+                    <small>
+                        1
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="startBottom">
+
+                <div class="profile">
+
+                    <div class="profileAvatar">
+                        S
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Saman
+                        </strong>
+
+                        <span>
+                            Local session
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    id="startPower"
+                    type="button"
+                >
+                    ⏻
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- ==================================================
+             TASKBAR
+        ================================================== -->
+
+        <footer id="taskbar">
+
+            <div class="taskbarLeft">
+
+                <button
+                    id="startButton"
+                    type="button"
+                >
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </button>
+
+
+                <div
+                    id="taskbarApps"
+                    class="taskbarApps"
+                ></div>
+
+            </div>
+
+
+            <div class="taskbarCenter">
+                MBN OS
+            </div>
+
+
+            <div class="systemTray">
+
+                <span>
+                    ◇
+                </span>
+
+                <span>
+                    🔊
+                </span>
+
+                <div class="trayClock">
+
+                    <strong id="trayTime">
+                        00:00
+                    </strong>
+
+                    <small id="trayDate">
+                        08/13/2026
+                    </small>
+
+                </div>
+
+            </div>
+
+        </footer>
+
+
+        <!-- ==================================================
+             NOTIFICATION
+        ================================================== -->
+
+        <div id="notification">
+
+            <div class="notificationIcon">
+                ✓
+            </div>
+
+            <div>
+
+                <strong>
+                    System ready
+                </strong>
+
+                <span>
+                    All components loaded
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             RIGHT CLICK MENU
+        ================================================== -->
+
+        <div
+            id="contextMenu"
+            class="contextMenu"
+        >
+
+            <button
+                class="contextItem"
+                data-context="refresh"
+                type="button"
+            >
+
+                <span>
+                    ↻
+                </span>
+
+                Refresh
+
+            </button>
+
+
+            <button
+                class="contextItem"
+                data-context="wallpaper"
+                type="button"
+            >
+
+                <span>
+                    ▧
+                </span>
+
+                Change background
+
+            </button>
+
+
+            <div class="contextDivider"></div>
+
+
+            <button
+                class="contextItem"
+                data-context="lock"
+                type="button"
+            >
+
+                <span>
+                    ⌑
+                </span>
+
+                Lock
+
+            </button>
+
+        </div>
+
+
+        <!-- ==================================================
+             WALLPAPER PICKER
+        ================================================== -->
+
+        <div
+            id="wallpaperMenu"
+            class="wallpaperMenu"
+        >
+
+            <div class="wallpaperHeader">
+
+                <span>
+                    CHOOSE BACKGROUND
+                </span>
+
+                <button
+                    id="wallpaperClose"
+                    type="button"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div
+                id="wallpaperGrid"
+                class="wallpaperGrid"
+            ></div>
+
+        </div>
+
+    </main>
+
+
+    <!-- ==================================================
+         AUDIO
+    ================================================== -->
+
+    <audio
+        id="music"
+        src="assets/audio/music.mp3"
+        preload="metadata"
+        loop
+    ></audio>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
